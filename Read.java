@@ -10,7 +10,10 @@ public class Read{
 			File fileToRead = new File(args[0]);
 			Scanner s = new Scanner(fileToRead);
 			
-			System.out.println(s.nextLine());
+			while(s.hasNextLine()){	
+				System.out.println(s.nextLine());
+			}
+			
 		}catch(Exception e){
 			
 		}
