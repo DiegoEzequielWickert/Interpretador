@@ -20,19 +20,19 @@ public class Interpretador {
 	
 	
 	private boolean verifyMistakes(String frase){
-		if(frase.equals("fim")){
+		if(frase.equals("FIM")){
 			return true;
-		}else if(frase.equals("recebe")){
+		}else if(frase.equals("RECEBE")){
 			return true;
-		}else if(frase.equals("soma")){
+		}else if(frase.equals("SOMA")){
 			return true;
-		}else if(frase.equals("subtrai")){
+		}else if(frase.equals("SUBTRAI")){
 			return true;
-		}else if(frase.equals("multiplica")){
+		}else if(frase.equals("MULTIPLICA")){
 			return true;
-		}else if(frase.equals("dividido")){
+		}else if(frase.equals("DIVIDE")){
 			return true;
-		}else if(frase.equals("mugir")){
+		}else if(frase.equals("MUGIR")){
 			return true;
 		}else if(frase.equals("int")){
 			return true;
@@ -49,11 +49,59 @@ public class Interpretador {
 		tokens = storeTokens.clone();
 	}
 	
-	private void erroDetectado(){
+	private void erroDetectado(int num){
+		
 		System.err.println("-----------------------------------");
 		System.err.println("ERRO DETECTADO, TERMINANDO PROGRAMA");
 		System.err.println("-----------------------------------");
-		System.exit(0);
+		
+		switch(num){
+		
+		case 0:
+			System.err.println("PALAVRA RESERVADA UTILIZADA NO CONTEXTO ERRADO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		case 1:
+			System.err.println("NAO E POSSIVEL ATRIBUIR VALOR FLOAT PARA VARIAVEL DO TIPO INT");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+		
+		case 2:
+			System.err.println("ERRO AO CONVERTER NUMERO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		case 3:			
+			System.err.println("NAO FOI POSSIVEL ENCONTRAR NENHUMA VARIAVEL COM O NOME INFORMADO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;	
+		
+		case 4:
+			System.err.println("NAO E POSSIVEL ATRIBUIR VALOR INT PARA VARIAVEL DO TIPO FLOAT");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		case 5:
+			System.err.println("FIM NAO ENCONTRADO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		case 6:
+			System.err.println("NOME DE VARIAVEL INVALIDO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		}
+				
+		
 	}
 	
 	private int verificaTipo(String abc){
@@ -78,148 +126,299 @@ public class Interpretador {
 				if(returnResult > 0){
 					
 					count++;
+					if(verifyMistakes(tokens[count])){
+						erroDetectado(0);
+					}					
+					
+					try{
+						int testConvert;
+						testConvert = Integer.parseInt(tokens[count]);
+						erroDetectado(6);
+					}catch(NumberFormatException r){
+						//NOME VALIDO SE CHEGAR AQUI
+					}
+					
 					nomeDaVariavel = tokens[count];
 					count++;
-					if(tokens[count].equals("recebe")){
+										
+					if(tokens[count].equals("RECEBE")){
 						count++;
-						if(verifyMistakes(tokens[count])){
-							erroDetectado();
-						}
+						
 						
 						if(returnResult == 3){
+														
 							valorSTRING = tokens[count];
 							count++;
 							
-							if(tokens[count].equals("fim") == false){
-								erroDetectado();
+							if(tokens[count].equals("FIM") == false){
+								erroDetectado(5);
 							}else{
 								stringVariables.put(nomeDaVariavel, valorSTRING);
 								count++;
 							}
 							
-						}else{
+						}else{	
 							
-							if(tokens[count].contains(".")){
-								valorFLOAT += Float.parseFloat(tokens[count]);
-								count++;
-							}else{
-								valorINT += Integer.parseInt(tokens[count]);
-								count++;
-							}					
-						
-							while(tokens[count].equals("fim") == false){
+							if(verifyMistakes(tokens[count])){
+								erroDetectado(0);
+							}
+							
+							if(returnResult == 1){ // INTEIRO
 								
-								if(tokens[count].equals("soma")){
-									count++;
-									if(verifyMistakes(tokens[count])){
-										erroDetectado();
-									}else{
-										if(tokens[count].contains(".")){
-											valorFLOAT += Float.parseFloat(tokens[count]);
-											count++;
-										}else{
-											valorINT += Integer.parseInt(tokens[count]);
-											count++;
-										}
-										
-									}
-								}else if(tokens[count].equals("subtrai")){
-									count++;
-									if(verifyMistakes(tokens[count])){
-										erroDetectado();
-									}else{
-										if(tokens[count].contains(".")){
-											valorFLOAT -= Float.parseFloat(tokens[count]);
-											count++;
-										}else{
-											valorINT -= Integer.parseInt(tokens[count]);
-											count++;
-										}
-									}
-								}else if(tokens[count].equals("multiplica")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
-									count++;
-									if(verifyMistakes(tokens[count])){
-										erroDetectado();
-									}else{
-										
-										if(returnResult == 1){
-											intResultado = valorINT + (int)valorFLOAT;
-										}else if(returnResult == 2){
-											floatResultado = (float)valorINT + valorFLOAT;
-										}		
-																				
-										if(tokens[count].contains(".")){
-											floatResultado *= Float.parseFloat(tokens[count]);
-											count++;
-										}else{
-											intResultado *= Integer.parseInt(tokens[count]);
-											count++;
-										}
-									}
-									
-								}else if(tokens[count].equals("dividido")){
-									count++;
-									
-									if(returnResult == 1){
-										intResultado = valorINT + (int)valorFLOAT;
-									}else if(returnResult == 2){
-										floatResultado = (float)valorINT + valorFLOAT;
-									}									
-									
-									if(tokens[count].contains(".")){
-										floatResultado /= Float.parseFloat(tokens[count]);
-										count++;
-									}else{
-										intResultado /= Integer.parseInt(tokens[count]);
-										count++;
-									}
+								if(tokens[count].contains(".")){
+									erroDetectado(1);
 								}else{
-									System.err.println("ERRO NA SINTAXE, TERMINANDO PROGRAMA");
-									System.exit(0);
+									intResultado += Integer.parseInt(tokens[count]);
+									count++;
 								}
 								
-							}
-							count++;
-							
-							
-							
-							
-							
-							if(returnResult == 1){
-								intResultado += valorINT + (int)valorFLOAT;
+								while(tokens[count].equals("FIM") == false){
+									
+									if(tokens[count].equals("SOMA")){
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{																				
+											if(tokens[count].contains(".")){
+												erroDetectado(1);
+											}else{
+												intResultado += Integer.parseInt(tokens[count]);
+												count++;
+											}											
+										}
+									}else if(tokens[count].equals("SUBTRAI")){
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{
+											if(tokens[count].contains(".")){
+												erroDetectado(1);
+											}else{
+												intResultado -= Integer.parseInt(tokens[count]);
+												count++;
+											}
+										}
+									}else if(tokens[count].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{
+											if(tokens[count].contains(".")){
+												erroDetectado(1);
+											}else{
+												intResultado *= Integer.parseInt(tokens[count]);
+												count++;
+											}
+										}
+										
+									}else if(tokens[count].equals("DIVIDE")){
+										count++;
+										
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{										
+											if(tokens[count].contains(".")){
+												erroDetectado(1);
+											}else{
+												intResultado /= Integer.parseInt(tokens[count]);
+												count++;
+											}
+										}
+										
+									}else{
+										System.err.println("ERRO NA SINTAXE, TERMINANDO PROGRAMA");
+										System.exit(0);
+									}
+									
+								}
+								
 								integerVariables.put(nomeDaVariavel, intResultado);
-							}else if(returnResult == 2){
-								floatResultado += (float)valorINT + valorFLOAT;
+								
+							}else if(returnResult == 2){ // FLOAT
+								
+								if(tokens[count].contains(".") == false){
+									erroDetectado(4);
+								}else{
+									floatResultado += Float.parseFloat(tokens[count]);
+									count++;
+								}
+								
+								while(tokens[count].equals("FIM") == false){
+									
+									if(tokens[count].equals("SOMA")){
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{																				
+											if(tokens[count].contains(".") == false){
+												erroDetectado(4);
+											}else{
+												floatResultado += Float.parseFloat(tokens[count]);
+												count++;
+											}											
+										}
+									}else if(tokens[count].equals("SUBTRAI")){
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{
+											if(tokens[count].contains(".") == false){
+												erroDetectado(4);
+											}else{
+												floatResultado -= Float.parseFloat(tokens[count]);
+												count++;
+											}
+										}
+									}else if(tokens[count].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
+										count++;
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{
+											if(tokens[count].contains(".") == false){
+												erroDetectado(4);
+											}else{
+												floatResultado *= Float.parseFloat(tokens[count]);
+												count++;
+											}
+										}
+										
+									}else if(tokens[count].equals("DIVIDE")){
+										count++;
+										
+										if(verifyMistakes(tokens[count])){
+											erroDetectado(0);
+										}else{
+											if(tokens[count].contains(".") == false){
+												erroDetectado(4);
+											}else{
+												floatResultado /= Float.parseFloat(tokens[count]);
+												count++;
+											}
+										}
+										
+									}else{
+										System.err.println("ERRO NA SINTAXE, TERMINANDO PROGRAMA");
+										System.exit(0);
+									}
+									
+								}	
+								
 								floatVariables.put(nomeDaVariavel, floatResultado);
-							}
+								
+							}// FIM FLOAT
 							
-						} // AQUI FHDIUHFAOIDJASIODJAIODAJDSAODIJAIOSDJAOSDIDJIODJSOIDAJSIODJ
-							
+						}// FIM DO VERIFICA SE E INT OU FLOAT	
+						
+					}else if(tokens[count].equals("FIM")){            // FIM DO TOKENS == RECEBE
+						if(returnResult == 1){
+							integerVariables.put(nomeDaVariavel, null);
+						}else if(returnResult == 2){
+							floatVariables.put(nomeDaVariavel, null);
+						}else if(returnResult == 3){
+							stringVariables.put(nomeDaVariavel, null);
+						}
 						
 					}else{
-						// APENAS DECLARA VARIÁVEL SEM VALOR
+						erroDetectado(5);
+					}
+					
+							
+				// FIM DO returnResult > 0	
+				}else if(tokens[count].equals("MUGIR")){
+					
+					count++;
+					int h;
+					h = 0;
+					String frase[] = new String[25];
+					
+					if(tokens[count].equals("FIM")){
+						frase[h] = "MOOOOOOOOOOOOO";
+					}else{
+																	
+						while(tokens[count].equals("FIM") == false){
+							
+							if(tokens[count].equals("VAR")){
+								count++;
+								
+								while(tokens[count].equals("--")){
+									count++;
+									frase[h] = " ";
+									h++;
+								}
+														
+								if(integerVariables.containsKey(tokens[count])){
+									frase[h] = String.valueOf(integerVariables.get(tokens[count]));
+									h++;
+								}else if( floatVariables.containsKey(tokens[count])){
+									frase[h] = String.valueOf(floatVariables.get(tokens[count]));
+									h++;
+								}else if(stringVariables.containsKey(tokens[count]) ){
+									frase[h] = stringVariables.get(tokens[count]);
+									h++;
+								}else{
+									erroDetectado(3);
+								}
+								
+							}else if(tokens[count].equals("VAZIO")){
+								frase[h] = "\n";
+								h++;
+							}else if(tokens[count].equals("--")){
+								frase[h] = " ";
+								h++;
+							}else{
+								frase[h] = tokens[count];
+								h++;
+							}
+							count++;
+						
+						}
+						
 						
 					}
 					
+					for(int e = 0; frase[e] != null ; e++){
+						System.out.print(frase[e]);
+					}
 					
-				}else if(tokens[count].equals("mugir")){
 					
+				}else if(tokens[count].equals("SE")){   // FAZ O SE (IF)
+								
+				
+				
+				
+				}else{
 					
-				}		
+					if(integerVariables.containsKey(tokens[count])){
+						
+					}else if( floatVariables.containsKey(tokens[count])){
+						
+					}else if(stringVariables.containsKey(tokens[count]) ){
+						
+					}else{
+						
+						
+					}
+					
+					// SE ENCONTRAR NOME DE VARIAVEL E DEPOIS ATRIBUICAO
+					// OU SE ENCONTRAR ALGO PERDIDO. FORA DE CONTEXTO
+				}
+				
 				count++;
-				System.out.println("VALOR DA LISTA " + integerVariables.get("nome"));
+			}// ENQUANTO COUNT FOR MENOR QUE TOKENS.LENGTH
 		
-			}
-			
+			// LEMBRE SE DE RESETAR VALORES
 			
 					
 		}catch(NumberFormatException f){
-			System.err.println("ERRO AO CONVERTER NUMERO");
+			erroDetectado(2);
 			System.exit(0);
 		}
 		
 	
 	}
+
+	
+	
 	
 }
 

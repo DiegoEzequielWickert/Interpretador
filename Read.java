@@ -1,9 +1,11 @@
-import java.util.Scanner;  
 import java.io.File;
+import java.util.Scanner;
+
 
 public class Read{
 
 	public static void main(String args[]){
+		
 		
 		Interpretador interpret = new Interpretador();	
 		int i = 0;
@@ -15,11 +17,12 @@ public class Read{
 			File fileToRead = new File(args[0]);
 			Scanner s = new Scanner(fileToRead);
 			
+						
 			while(s.hasNextLine()){
 				storeWords[i] = s.nextLine();
 				i++;
-			}
-			
+			}			
+						
 			int f = 0;
 			String temp[] = new String[200];
 			
@@ -50,8 +53,9 @@ public class Read{
 				System.out.println(storeTokens[h]);
 			}*/
 			
+									
 			interpret.setTokens(storeTokens);
-			interpret.iniciaInterpretacao();
+			interpret.startInterpret();
 			
 		}catch(Exception e){
 			
