@@ -27,6 +27,7 @@ public class Read{
 			String temp[] = new String[200];
 			
 			
+			
 			while(storeWords[f] != null){
 				int g = 0;
 				temp = storeWords[f].split("\\s");

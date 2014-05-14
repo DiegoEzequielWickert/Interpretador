@@ -405,6 +405,7 @@ public class Interpretador {
 				
 				count++;
 			}// ENQUANTO COUNT FOR MENOR QUE TOKENS.LENGTH
+			
 		
 			// LEMBRE SE DE RESETAR VALORES
 			
