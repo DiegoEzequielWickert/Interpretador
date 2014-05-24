@@ -1,4 +1,8 @@
-string nome FIM
-string abc RECEBE jose FIM
-nome RECEBE abc FIM
-MUGIR VAR nome -- VAR abc FIM
+int x RECEBE 2 FIM
+
+SE x MAIOR 1
+
+	MUGIR ola -- mundo FIM
+	
+FIMSE
+

@@ -23,6 +23,18 @@ public class Error {
 			return true;
 		}else if(frase.equals("string")){
 			return true;
+		}else if(frase.equals("MAIOR")){
+			return true;
+		}else if(frase.equals("MAIORIGUAL")){
+			return true;
+		}else if(frase.equals("MENOR")){
+			return true;
+		}else if(frase.equals("MENORIGUAL")){
+			return true;
+		}else if(frase.equals("IGUAL")){
+			return true;
+		}else if(frase.equals("DIFERENTE")){
+			return true;
 		}
 		
 		return false;
@@ -99,6 +111,23 @@ public void detectadoErro(int num){
 			System.exit(0);
 			break;
 			
+		case 10:
+			System.err.println("TIPOS DIFERENTES NA COMPARACAO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;	
+			
+		case 11:
+			System.err.println("ERRO DE PREGUICA");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
+			
+		case 12:
+			System.err.println("FIM DO *SE* NAO ENCONTRADO");
+			System.err.println("-----------------------------------");
+			System.exit(0);
+			break;
 		}
 				
 		

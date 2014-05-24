@@ -78,7 +78,7 @@ public class Recebe {
 									Interpretador.addCount();
 								}
 							}
-						}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
+						}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ 
 							Interpretador.addCount();
 							if(error.verifyWord(tokens[Interpretador.getCount()])){
 								error.detectadoErro(0);
@@ -170,7 +170,7 @@ public class Recebe {
 									Interpretador.addCount();
 								}
 							}
-						}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
+						}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ 
 							Interpretador.addCount();
 							if(error.verifyWord(tokens[Interpretador.getCount()])){
 								error.detectadoErro(0);
@@ -367,7 +367,7 @@ public class Recebe {
 						Interpretador.addCount();
 					}
 				}
-			}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
+			}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){ 
 				Interpretador.addCount();
 				if(error.verifyWord(tokens[Interpretador.getCount()])){
 					error.detectadoErro(0);
@@ -449,6 +449,24 @@ public class Recebe {
 			Interpretador.addCount();
 		}else if(tokens[Interpretador.getCount()].equals("#RECEBE")){
 			valor = "RECEBE";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#MAIOR")){
+			valor = "MAIOR";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#MAIORIGUAL")){
+			valor = "MAIORIGUAL";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#MENOR")){
+			valor = "MENOR";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#MENORIGUAL")){
+			valor = "MENORIGUAL";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#IGUAL")){
+			valor = "IGUAL";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#DIFERENTE")){
+			valor = "DIFERENTE";
 			Interpretador.addCount();
 		}else if(Interpretador.doesVariableNameAlreadyExists()){
 			valor = Interpretador.getStringMap().get(tokens[Interpretador.getCount()]);

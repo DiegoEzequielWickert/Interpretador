@@ -7,18 +7,21 @@ public class Interpretador {
 	Error error = new Error();
 	Recebe recebe = new Recebe();
 	Mugir mugir = new Mugir();
+	Se se = new Se();
 	
 	private static Map <String, String> stringVariables = new HashMap<String, String>();
 	private static Map <String, Integer> integerVariables = new HashMap<String, Integer>();
 	private static Map <String, Float> floatVariables = new HashMap<String, Float>();
 			
+	private int contadorDeSe = 0;
 	private static String nomeDaVariavel;
 	private static String [] tokens = new String[2000];
 	private static int returnResult;
 	private static int count;
 	private	String valorSTRING;
-	
-	
+	private boolean seRetorno = false;
+	private boolean seAtivo = false;
+		
 	public void setTokens(String storeTokens[]){
 		tokens = storeTokens.clone();
 	}
@@ -51,8 +54,7 @@ public class Interpretador {
 					}					
 					
 					try{
-						int testConvert = 0;
-						testConvert = Integer.parseInt(tokens[count]);
+						Integer.parseInt(tokens[count]);
 						error.detectadoErro(6);
 					}catch(NumberFormatException r){
 						//NOME VALIDO SE CHEGAR AQUI
@@ -90,10 +92,46 @@ public class Interpretador {
 					mugir.comecaMugir(tokens);
 						
 				}else if(tokens[count].equals("SE")){   // FAZ O SE (IF)
-								
+					contadorDeSe++;
+					count++;
+					
+					seRetorno = se.comecaSe(tokens);
+					//count++;
+					System.out.println(seRetorno);
+					
+					if(seRetorno == true){
+						seAtivo = true;
+					}else{
+						while(true){
+							
+							if(tokens[count].equals("FIMSE") == true){
+								contadorDeSe--;
+								break;
+							}else if(tokens[count].equals("SENAO") == true){
+								break;
+							}
+							count++;
+							
+							if((count >= tokens.length)){
+								error.detectadoErro(12);
+							}
+						}
+										
+					}
+					
+					
 				
-				
-				
+				}else if(tokens[count].equals("FIMSE")){
+					contadorDeSe--;
+				}else if(tokens[count].equals("SENAO")){
+					while(tokens[count].equals("FIMSE") == false){
+						count++;
+						
+						if(count >= tokens.length){
+							error.detectadoErro(12);
+						}
+					}
+					contadorDeSe--;
 				}else{
 					String nomeVar = null;
 					if(integerVariables.containsKey(tokens[count])){
