@@ -4,106 +4,26 @@ import java.util.Map;
 
 public class Interpretador {
 	
-	Map <String, String> stringVariables = new HashMap<String, String>();
-	Map <String, Integer> integerVariables = new HashMap<String, Integer>();
-	Map <String, Float> floatVariables = new HashMap<String, Float>();
+	Error error = new Error();
+	Recebe recebe = new Recebe();
+	Mugir mugir = new Mugir();
+	
+	private static Map <String, String> stringVariables = new HashMap<String, String>();
+	private static Map <String, Integer> integerVariables = new HashMap<String, Integer>();
+	private static Map <String, Float> floatVariables = new HashMap<String, Float>();
 			
-	String nomeDaVariavel;
-	String [] tokens = new String[2000];
-	int returnResult;
-	int count;
-	int intResultado = 0;
-	int valorINT = 0;
-	float valorFLOAT = 0.0f;
-	float floatResultado = 0.0f;
-	String valorSTRING;
+	private static String nomeDaVariavel;
+	private static String [] tokens = new String[2000];
+	private static int returnResult;
+	private static int count;
+	private	String valorSTRING;
 	
-	
-	private boolean verifyMistakes(String frase){
-		if(frase.equals("FIM")){
-			return true;
-		}else if(frase.equals("RECEBE")){
-			return true;
-		}else if(frase.equals("SOMA")){
-			return true;
-		}else if(frase.equals("SUBTRAI")){
-			return true;
-		}else if(frase.equals("MULTIPLICA")){
-			return true;
-		}else if(frase.equals("DIVIDE")){
-			return true;
-		}else if(frase.equals("MUGIR")){
-			return true;
-		}else if(frase.equals("int")){
-			return true;
-		}else if(frase.equals("float")){
-			return true;
-		}else if(frase.equals("string")){
-			return true;
-		}
-		
-		return false;
-	}
 	
 	public void setTokens(String storeTokens[]){
 		tokens = storeTokens.clone();
 	}
 	
-	private void erroDetectado(int num){
 		
-		System.err.println("-----------------------------------");
-		System.err.println("ERRO DETECTADO, TERMINANDO PROGRAMA");
-		System.err.println("-----------------------------------");
-		
-		switch(num){
-		
-		case 0:
-			System.err.println("PALAVRA RESERVADA UTILIZADA NO CONTEXTO ERRADO");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-			
-		case 1:
-			System.err.println("NAO E POSSIVEL ATRIBUIR VALOR FLOAT PARA VARIAVEL DO TIPO INT");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-		
-		case 2:
-			System.err.println("ERRO AO CONVERTER NUMERO");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-			
-		case 3:			
-			System.err.println("NAO FOI POSSIVEL ENCONTRAR NENHUMA VARIAVEL COM O NOME INFORMADO");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;	
-		
-		case 4:
-			System.err.println("NAO E POSSIVEL ATRIBUIR VALOR INT PARA VARIAVEL DO TIPO FLOAT");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-			
-		case 5:
-			System.err.println("FIM NAO ENCONTRADO");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-			
-		case 6:
-			System.err.println("NOME DE VARIAVEL INVALIDO");
-			System.err.println("-----------------------------------");
-			System.exit(0);
-			break;
-			
-		}
-				
-		
-	}
-	
 	private int verificaTipo(String abc){
 		if(abc.equals("int")){
 			return 1;
@@ -126,200 +46,40 @@ public class Interpretador {
 				if(returnResult > 0){
 					
 					count++;
-					if(verifyMistakes(tokens[count])){
-						erroDetectado(0);
+					if(error.verifyWord(tokens[count])){
+						error.detectadoErro(0);
 					}					
 					
 					try{
-						int testConvert;
+						int testConvert = 0;
 						testConvert = Integer.parseInt(tokens[count]);
-						erroDetectado(6);
+						error.detectadoErro(6);
 					}catch(NumberFormatException r){
 						//NOME VALIDO SE CHEGAR AQUI
 					}
 					
-					nomeDaVariavel = tokens[count];
-					count++;
+					if(doesVariableNameAlreadyExists() == false){
+						nomeDaVariavel = tokens[count];
+						count++;
+					}else{
+						error.detectadoErro(7);
+					}
 										
 					if(tokens[count].equals("RECEBE")){
 						count++;
-						
-						
-						if(returnResult == 3){
-														
-							valorSTRING = tokens[count];
-							count++;
-							
-							if(tokens[count].equals("FIM") == false){
-								erroDetectado(5);
-							}else{
-								stringVariables.put(nomeDaVariavel, valorSTRING);
-								count++;
-							}
-							
-						}else{	
-							
-							if(verifyMistakes(tokens[count])){
-								erroDetectado(0);
-							}
-							
-							if(returnResult == 1){ // INTEIRO
-								
-								if(tokens[count].contains(".")){
-									erroDetectado(1);
-								}else{
-									intResultado += Integer.parseInt(tokens[count]);
-									count++;
-								}
-								
-								while(tokens[count].equals("FIM") == false){
-									
-									if(tokens[count].equals("SOMA")){
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{																				
-											if(tokens[count].contains(".")){
-												erroDetectado(1);
-											}else{
-												intResultado += Integer.parseInt(tokens[count]);
-												count++;
-											}											
-										}
-									}else if(tokens[count].equals("SUBTRAI")){
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{
-											if(tokens[count].contains(".")){
-												erroDetectado(1);
-											}else{
-												intResultado -= Integer.parseInt(tokens[count]);
-												count++;
-											}
-										}
-									}else if(tokens[count].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{
-											if(tokens[count].contains(".")){
-												erroDetectado(1);
-											}else{
-												intResultado *= Integer.parseInt(tokens[count]);
-												count++;
-											}
-										}
-										
-									}else if(tokens[count].equals("DIVIDE")){
-										count++;
-										
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{										
-											if(tokens[count].contains(".")){
-												erroDetectado(1);
-											}else{
-												intResultado /= Integer.parseInt(tokens[count]);
-												count++;
-											}
-										}
-										
-									}else{
-										System.err.println("ERRO NA SINTAXE, TERMINANDO PROGRAMA");
-										System.exit(0);
-									}
-									
-								}
-								
-								integerVariables.put(nomeDaVariavel, intResultado);
-								
-							}else if(returnResult == 2){ // FLOAT
-								
-								if(tokens[count].contains(".") == false){
-									erroDetectado(4);
-								}else{
-									floatResultado += Float.parseFloat(tokens[count]);
-									count++;
-								}
-								
-								while(tokens[count].equals("FIM") == false){
-									
-									if(tokens[count].equals("SOMA")){
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{																				
-											if(tokens[count].contains(".") == false){
-												erroDetectado(4);
-											}else{
-												floatResultado += Float.parseFloat(tokens[count]);
-												count++;
-											}											
-										}
-									}else if(tokens[count].equals("SUBTRAI")){
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{
-											if(tokens[count].contains(".") == false){
-												erroDetectado(4);
-											}else{
-												floatResultado -= Float.parseFloat(tokens[count]);
-												count++;
-											}
-										}
-									}else if(tokens[count].equals("MULTIPLICA")){ // AQUI TEM ERRO  FADOPFJSDFNDFUIHSDFIOSHFUIDFHSDUI
-										count++;
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{
-											if(tokens[count].contains(".") == false){
-												erroDetectado(4);
-											}else{
-												floatResultado *= Float.parseFloat(tokens[count]);
-												count++;
-											}
-										}
-										
-									}else if(tokens[count].equals("DIVIDE")){
-										count++;
-										
-										if(verifyMistakes(tokens[count])){
-											erroDetectado(0);
-										}else{
-											if(tokens[count].contains(".") == false){
-												erroDetectado(4);
-											}else{
-												floatResultado /= Float.parseFloat(tokens[count]);
-												count++;
-											}
-										}
-										
-									}else{
-										System.err.println("ERRO NA SINTAXE, TERMINANDO PROGRAMA");
-										System.exit(0);
-									}
-									
-								}	
-								
-								floatVariables.put(nomeDaVariavel, floatResultado);
-								
-							}// FIM FLOAT
-							
-						}// FIM DO VERIFICA SE E INT OU FLOAT	
+						recebe.atribuiValores(tokens);
 						
 					}else if(tokens[count].equals("FIM")){            // FIM DO TOKENS == RECEBE
 						if(returnResult == 1){
-							integerVariables.put(nomeDaVariavel, null);
+							integerVariables.put(nomeDaVariavel, 0);
 						}else if(returnResult == 2){
-							floatVariables.put(nomeDaVariavel, null);
+							floatVariables.put(nomeDaVariavel, 0.0f);
 						}else if(returnResult == 3){
 							stringVariables.put(nomeDaVariavel, null);
 						}
 						
 					}else{
-						erroDetectado(5);
+						error.detectadoErro(5);
 					}
 					
 							
@@ -327,76 +87,64 @@ public class Interpretador {
 				}else if(tokens[count].equals("MUGIR")){
 					
 					count++;
-					int h;
-					h = 0;
-					String frase[] = new String[25];
-					
-					if(tokens[count].equals("FIM")){
-						frase[h] = "MOOOOOOOOOOOOO";
-					}else{
-																	
-						while(tokens[count].equals("FIM") == false){
-							
-							if(tokens[count].equals("VAR")){
-								count++;
-								
-								while(tokens[count].equals("--")){
-									count++;
-									frase[h] = " ";
-									h++;
-								}
-														
-								if(integerVariables.containsKey(tokens[count])){
-									frase[h] = String.valueOf(integerVariables.get(tokens[count]));
-									h++;
-								}else if( floatVariables.containsKey(tokens[count])){
-									frase[h] = String.valueOf(floatVariables.get(tokens[count]));
-									h++;
-								}else if(stringVariables.containsKey(tokens[count]) ){
-									frase[h] = stringVariables.get(tokens[count]);
-									h++;
-								}else{
-									erroDetectado(3);
-								}
-								
-							}else if(tokens[count].equals("VAZIO")){
-								frase[h] = "\n";
-								h++;
-							}else if(tokens[count].equals("--")){
-								frase[h] = " ";
-								h++;
-							}else{
-								frase[h] = tokens[count];
-								h++;
-							}
-							count++;
+					mugir.comecaMugir(tokens);
 						
-						}
-						
-						
-					}
-					
-					for(int e = 0; frase[e] != null ; e++){
-						System.out.print(frase[e]);
-					}
-					
-					
 				}else if(tokens[count].equals("SE")){   // FAZ O SE (IF)
 								
 				
 				
 				
 				}else{
-					
+					String nomeVar = null;
 					if(integerVariables.containsKey(tokens[count])){
+						nomeVar = tokens[count];
+						count++;
 						
+						if(tokens[count].equals("RECEBE")){
+							count++;
+							if(error.verifyWord(tokens[count])){
+								error.detectadoErro(0);
+							}							
+							integerVariables.put(nomeVar, recebe.recebeInt(tokens, integerVariables.get(nomeVar)));
+						}else{
+							error.detectadoErro(8);
+						}					
+						
+												
 					}else if( floatVariables.containsKey(tokens[count])){
+						nomeVar = tokens[count];
+						count++;
 						
+						if(tokens[count].equals("RECEBE")){
+							count++;
+							if(error.verifyWord(tokens[count])){
+								error.detectadoErro(0);
+							}
+							floatVariables.put(nomeVar, recebe.recebeFloat(tokens, floatVariables.get(nomeVar)));
+							
+						}else{
+							error.detectadoErro(8);
+						}
 					}else if(stringVariables.containsKey(tokens[count]) ){
+						nomeVar = tokens[count];
+						count++;
 						
+						if(tokens[count].equals("RECEBE")){
+							count++;
+							if(error.verifyWord(tokens[count])){
+								error.detectadoErro(0);
+							}
+							
+							stringVariables.put(nomeVar, recebe.recebeString(tokens));
+							
+							
+							
+						}else{
+							error.detectadoErro(8);
+						}
 					}else{
-						
-						
+						System.out.println(tokens[count]);	
+						error.detectadoErro(9);						
 					}
 					
 					// SE ENCONTRAR NOME DE VARIAVEL E DEPOIS ATRIBUICAO
@@ -405,13 +153,12 @@ public class Interpretador {
 				
 				count++;
 			}// ENQUANTO COUNT FOR MENOR QUE TOKENS.LENGTH
-			
 		
 			// LEMBRE SE DE RESETAR VALORES
 			
 					
 		}catch(NumberFormatException f){
-			erroDetectado(2);
+			error.detectadoErro(2);
 			System.exit(0);
 		}
 		
@@ -419,7 +166,57 @@ public class Interpretador {
 	}
 
 	
+	public static void addCount(){
+		count++;		
+	}
+		
+	public static int getCount(){
+		return count;
+	}
+		
+	public void setValorString(String novoValorString){
+		this.valorSTRING = novoValorString;		
+	}
+
+	public static int getReturnResult(){
+		return returnResult;
+	}
 	
+	public static void setIntegerVariable(int intResultado){
+		integerVariables.put(nomeDaVariavel, intResultado);
+	}
+	
+	public static void setFloatVariable(float floatResultado){
+		floatVariables.put(nomeDaVariavel, floatResultado);
+	}
+	
+	public static void setStringVariable(String valorStr){
+		stringVariables.put(nomeDaVariavel, valorStr);
+	}
+	
+	public static Map<String,Integer> getIntegerMap(){
+		return integerVariables;
+	}
+	
+	public static Map<String,Float> getFloatMap(){
+		return floatVariables;
+	}
+	
+	public static Map<String, String> getStringMap(){
+		return stringVariables;
+	}
+	
+	public static boolean doesVariableNameAlreadyExists(){
+		if(integerVariables.containsKey(tokens[count])){
+			return true;
+		}else if( floatVariables.containsKey(tokens[count])){
+			return true;
+		}else if(stringVariables.containsKey(tokens[count]) ){
+			return true;
+		}
+		
+		return false;
+	}
 	
 }
 

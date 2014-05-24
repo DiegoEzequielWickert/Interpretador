@@ -1,1 +1,4 @@
-int x FIM RECEBE 45 FIM
+string nome FIM
+string abc RECEBE jose FIM
+nome RECEBE abc FIM
+MUGIR VAR nome -- VAR abc FIM

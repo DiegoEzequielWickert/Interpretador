@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 public class Read{
-
+	
 	public static void main(String args[]){
 		
 		
@@ -25,7 +25,6 @@ public class Read{
 						
 			int f = 0;
 			String temp[] = new String[200];
-			
 			
 			
 			while(storeWords[f] != null){
