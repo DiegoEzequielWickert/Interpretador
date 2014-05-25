@@ -1,8 +1,26 @@
 int x RECEBE 2 FIM
+int z RECEBE 5 FIM
 
-SE x MAIOR 1
+ENQUANTO x MAIOR 0 ENTAO
 
-	MUGIR ola -- mundo FIM
 	
-FIMSE
+	ENQUANTO z MENOR 7 ENTAO
+	
+		MUGIR ola -- mundo FIM
+		MUGIR VAZIO FIM
+		z RECEBE z SOMA 1 FIM
+		
+		SE z IGUAL 7 ENTAO
+			MUGIR z -- e -- igual -- a -- 7 FIM
+			MUGIR VAZIO FIM
+		FIMSE
+	
+	FIMENQUANTO
+	
+	MUGIR adeus -- mundo FIM
+	x RECEBE x SUBTRAI 1 FIM
+	MUGIR VAZIO FIM
+		
+FIMENQUANTO
 
+MUGIR sfdadsdsaasds FIM

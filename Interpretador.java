@@ -4,6 +4,8 @@ import java.util.Map;
 
 public class Interpretador {
 	
+		
+	Enquanto enquanto = new Enquanto();
 	Error error = new Error();
 	Recebe recebe = new Recebe();
 	Mugir mugir = new Mugir();
@@ -13,6 +15,9 @@ public class Interpretador {
 	private static Map <String, Integer> integerVariables = new HashMap<String, Integer>();
 	private static Map <String, Float> floatVariables = new HashMap<String, Float>();
 			
+	private int fimIndex = 0;
+	private int indexCount = 0;
+	private int [] enquantoIndex = new int[15];
 	private int contadorDeSe = 0;
 	private static String nomeDaVariavel;
 	private static String [] tokens = new String[2000];
@@ -20,7 +25,8 @@ public class Interpretador {
 	private static int count;
 	private	String valorSTRING;
 	private boolean seRetorno = false;
-	private boolean seAtivo = false;
+	private boolean retornoEnquanto = false;
+	
 		
 	public void setTokens(String storeTokens[]){
 		tokens = storeTokens.clone();
@@ -96,11 +102,9 @@ public class Interpretador {
 					count++;
 					
 					seRetorno = se.comecaSe(tokens);
-					//count++;
-					System.out.println(seRetorno);
 					
 					if(seRetorno == true){
-						seAtivo = true;
+						
 					}else{
 						while(true){
 							
@@ -121,6 +125,47 @@ public class Interpretador {
 					
 					
 				
+				}else if(tokens[count].equals("ENQUANTO")){
+					
+					count++;
+					enquantoIndex[indexCount] = count;
+					indexCount++;
+					retornoEnquanto = enquanto.comecaEnquanto(tokens);
+					
+					if(retornoEnquanto == true){
+						
+					}else{
+						while(true){
+							
+							if(tokens[count].equals("FIMENQUANTO")){
+								indexCount--;
+								break;
+							}
+							
+							count++;
+							
+							if(count >= tokens.length){
+								error.detectadoErro(12);
+							}				
+														
+						}
+					}					
+					
+					
+					
+				}else if(tokens[count].equals("FIMENQUANTO")){
+					fimIndex = count;
+					if(indexCount > 0){
+						indexCount--;
+					}
+					count = enquantoIndex[indexCount];
+					if(enquanto.comecaEnquanto(tokens)){
+						indexCount++;
+					}else{
+						count = fimIndex;
+												
+					}
+					
 				}else if(tokens[count].equals("FIMSE")){
 					contadorDeSe--;
 				}else if(tokens[count].equals("SENAO")){
@@ -143,7 +188,7 @@ public class Interpretador {
 							if(error.verifyWord(tokens[count])){
 								error.detectadoErro(0);
 							}							
-							integerVariables.put(nomeVar, recebe.recebeInt(tokens, integerVariables.get(nomeVar)));
+							integerVariables.put(nomeVar, recebe.recebeInt(tokens));
 						}else{
 							error.detectadoErro(8);
 						}					
@@ -158,7 +203,7 @@ public class Interpretador {
 							if(error.verifyWord(tokens[count])){
 								error.detectadoErro(0);
 							}
-							floatVariables.put(nomeVar, recebe.recebeFloat(tokens, floatVariables.get(nomeVar)));
+							floatVariables.put(nomeVar, recebe.recebeFloat(tokens));
 							
 						}else{
 							error.detectadoErro(8);
@@ -174,9 +219,7 @@ public class Interpretador {
 							}
 							
 							stringVariables.put(nomeVar, recebe.recebeString(tokens));
-							
-							
-							
+														
 						}else{
 							error.detectadoErro(8);
 						}
@@ -185,22 +228,18 @@ public class Interpretador {
 						error.detectadoErro(9);						
 					}
 					
-					// SE ENCONTRAR NOME DE VARIAVEL E DEPOIS ATRIBUICAO
-					// OU SE ENCONTRAR ALGO PERDIDO. FORA DE CONTEXTO
 				}
 				
 				count++;
-			}// ENQUANTO COUNT FOR MENOR QUE TOKENS.LENGTH
-		
-			// LEMBRE SE DE RESETAR VALORES
-			
+			}			
 					
 		}catch(NumberFormatException f){
 			error.detectadoErro(2);
 			System.exit(0);
 		}
 		
-	
+		
+		
 	}
 
 	

@@ -222,7 +222,10 @@ public class Recebe {
 	}
 	
 	
-	public int recebeInt(String [] tokens, int intResultado){
+	public int recebeInt(String [] tokens){
+		
+		int intResultado = 0;
+		
 		if(tokens[Interpretador.getCount()].contains(".")){
 			error.detectadoErro(1);
 		}else{
@@ -316,8 +319,9 @@ public class Recebe {
 	}
 	
 	
-	public float recebeFloat(String [] tokens, float floatResultado){
+	public float recebeFloat(String [] tokens){
 		
+		float floatResultado = 0.0f;
 		
 		if(tokens[Interpretador.getCount()].contains(".") == false){
 			error.detectadoErro(4);
@@ -467,6 +471,15 @@ public class Recebe {
 			Interpretador.addCount();
 		}else if(tokens[Interpretador.getCount()].equals("#DIFERENTE")){
 			valor = "DIFERENTE";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#ENQUANTO")){
+			valor = "ENQUANTO";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#ENTAO")){
+			valor = "ENTAO";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#FIMSE")){
+			valor = "FIMSE";
 			Interpretador.addCount();
 		}else if(Interpretador.doesVariableNameAlreadyExists()){
 			valor = Interpretador.getStringMap().get(tokens[Interpretador.getCount()]);

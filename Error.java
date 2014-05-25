@@ -35,6 +35,12 @@ public class Error {
 			return true;
 		}else if(frase.equals("DIFERENTE")){
 			return true;
+		}else if(frase.equals("ENQUANTO")){
+			return true;
+		}else if(frase.equals("ENTAO")){
+			return true;
+		}else if(frase.equals("FIMSE")){
+			return true;
 		}
 		
 		return false;

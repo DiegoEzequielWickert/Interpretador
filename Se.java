@@ -10,199 +10,374 @@ public class Se {
 	int valueType;
 	int valueOther;
 	
+	
 	public boolean comecaSe(String [] tokens){
 		
 		valueType = verificaVar(tokens);
 		setCompara();
 		Interpretador.addCount();
 		
-		if(tokens[Interpretador.getCount()].equals("IGUAL")){			/////////////////////////////////////////////////////////////
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
-			
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara == Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
+			while(true){				
+		
+				if(tokens[Interpretador.getCount()].equals("IGUAL")){			/////////////////////////////////////////////////////////////
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
 					}else{
-						return false;
-					}
-				}else if(valueType == 2){
-					if(floatCompara == Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 3){
-					if(stringCompara.equals(verificaString(tokens))){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				error.detectadoErro(11);
-			}
-			
-		}else if(tokens[Interpretador.getCount()].equals("MAIOR")){				/////////////////////////////////////////////////////////////
-			
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
 						
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara > Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
+						if(valueType == 1){
+							if(intCompara == valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara == valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.equals(valorString)){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
 					}
-				}else if(valueType == 2){
-					if(floatCompara > Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
+					
+				}else if(tokens[Interpretador.getCount()].equals("MAIOR")){				/////////////////////////////////////////////////////////////
+					
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+						
+					
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
 					}else{
-						return false;
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
+						
+						
+						if(valueType == 1){
+							if(intCompara > valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara > valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.length() > valorString.length()){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
 					}
-				}else if(valueType == 3){
-					if(stringCompara.length() > verificaString(tokens).length()){
-						return true;
+					
+					
+				}else if(tokens[Interpretador.getCount()].equals("MENOR")){			/////////////////////////////////////////////////////////////
+					
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
 					}else{
-						return false;
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
+						
+						if(valueType == 1){
+							if(intCompara < valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara < valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.length() < valorString.length()){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
 					}
+					
+					
+					
+				}else if(tokens[Interpretador.getCount()].equals("MENORIGUAL")){
+					
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
+					}else{
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
+						
+						if(valueType == 1){
+							if(intCompara <= valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara <= valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.length() <= valorString.length()){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
+					}
+					
+					
+				}else if(tokens[Interpretador.getCount()].equals("MAIORIGUAL")){
+					
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
+					}else{
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
+						
+						if(valueType == 1){
+							if(intCompara >= valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara >= valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.length() >= valorString.length()){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
+					}
+					
+					
+				}else if(tokens[Interpretador.getCount()].equals("DIFERENTE")){
+					
+					Interpretador.addCount();
+					valueOther = verificaVar(tokens);
+					Interpretador.addCount();
+					
+					if(valueType != valueOther){
+						error.detectadoErro(10);
+					}else{
+						
+						if(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+							resolveExpressao(tokens);
+						}
+						
+						if(valueType == 1){
+							if(intCompara != valorInt){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 2){
+							if(floatCompara != valorFloat){
+								return true;
+							}else{
+								return false;
+							}
+						}else if(valueType == 3){
+							if(stringCompara.equals(valorString) == false){
+								return true;
+							}else{
+								return false;
+							}
+						}
+						error.detectadoErro(11);
+					}
+					
+				}else if(tokens[Interpretador.getCount()].equals("SOMA")){
+					
+					Interpretador.addCount();
+					
+					if(error.verifyWord(tokens[Interpretador.getCount()])){
+						error.detectadoErro(0);
+					}
+								
+					if(valueType == 1){
+						if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+							intCompara += Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								intCompara += Integer.parseInt(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						
+						}
+						 
+					}else if(valueType == 2){
+						
+						if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+							floatCompara += Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								floatCompara += Float.parseFloat(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+							
+						}
+					}else if(valueType == 3){
+						error.detectadoErro(8);
+					}
+						
+				}else if(tokens[Interpretador.getCount()].equals("SUBTRAI")){
+					
+					Interpretador.addCount();
+					
+					if(error.verifyWord(tokens[Interpretador.getCount()])){
+						error.detectadoErro(0);
+					}
+								
+					if(valueType == 1){
+						
+						if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+							intCompara -= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								intCompara -= Integer.parseInt(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+							
+						}
+						 
+					}else if(valueType == 2){
+						if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+							floatCompara -= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						}else{
+							try{
+								floatCompara -= Float.parseFloat(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}	
+					}else if(valueType == 3){
+						error.detectadoErro(8);
+					}
+				}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){
+					Interpretador.addCount();
+					
+					if(error.verifyWord(tokens[Interpretador.getCount()])){
+						error.detectadoErro(0);
+					}
+								
+					if(valueType == 1){
+						if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+							intCompara *= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								intCompara *= Integer.parseInt(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}
+					}else if(valueType == 2){
+						if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+							floatCompara *= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						}else{
+							try{
+								floatCompara *= Float.parseFloat(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}
+					}else if(valueType == 3){
+						error.detectadoErro(8);
+					}
+				}else if(tokens[Interpretador.getCount()].equals("DIVIDE")){
+					Interpretador.addCount();
+					
+					if(error.verifyWord(tokens[Interpretador.getCount()])){
+						error.detectadoErro(0);
+					}
+								
+					if(valueType == 1){
+						if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+							intCompara /= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								intCompara /= Integer.parseInt(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}	 
+					}else if(valueType == 2){
+						if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+							floatCompara /= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						}else{
+							try{
+								floatCompara /= Float.parseFloat(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}
+					}else if(valueType == 3){
+						error.detectadoErro(8);
+					}
+				}else{
+					error.detectadoErro(11);					
 				}
-				error.detectadoErro(11);
-			}
-			
-			
-		}else if(tokens[Interpretador.getCount()].equals("MENOR")){			/////////////////////////////////////////////////////////////
-			
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
-			
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara < Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 2){
-					if(floatCompara < Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 3){
-					if(stringCompara.length() < verificaString(tokens).length()){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				error.detectadoErro(11);
-			}
-			
-			
-			
-		}else if(tokens[Interpretador.getCount()].equals("MENORIGUAL")){
-			
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
-			
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara <= Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 2){
-					if(floatCompara <= Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 3){
-					if(stringCompara.length() <= verificaString(tokens).length()){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				error.detectadoErro(11);
-			}
-			
-			
-		}else if(tokens[Interpretador.getCount()].equals("MAIORIGUAL")){
-			
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
-			
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara >= Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 2){
-					if(floatCompara >= Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 3){
-					if(stringCompara.length() >= verificaString(tokens).length()){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				error.detectadoErro(11);
-			}
-			
-			
-		}else if(tokens[Interpretador.getCount()].equals("DIFERENTE")){
-			
-			Interpretador.addCount();
-			valueOther = verificaVar(tokens);
-			
-			if(valueType != valueOther){
-				error.detectadoErro(10);
-			}else{
-				if(valueType == 1){
-					if(intCompara != Integer.parseInt(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 2){
-					if(floatCompara != Float.parseFloat(tokens[Interpretador.getCount()])){
-						return true;
-					}else{
-						return false;
-					}
-				}else if(valueType == 3){
-					if(stringCompara.equals(verificaString(tokens)) == false){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				error.detectadoErro(11);
-			}
-			
+				Interpretador.addCount();
 		}
-		error.detectadoErro(11);
-		return false;
+		
 	}	
 	
 	private int verificaVar(String [] tokens){
@@ -238,22 +413,7 @@ public class Se {
 					return 3;
 				}
 			}
-			/*if(tokens[Interpretador.getCount()].contains(".")){
-				String num = tokens[Interpretador.getCount()];
-				System.out.println(num);
-				valorFloat = Float.parseFloat(num);
-				return 2;
-			}else{
-				try{
-					valorInt = Integer.parseInt(tokens[Interpretador.getCount()]);
-					return 1;
-				}catch(NumberFormatException d){
-					valorString = tokens[Interpretador.getCount()];
-					return 3;
-				}
-			}*/
-			
-			
+					
 		}
 		error.detectadoErro(11);
 		return 0;
@@ -300,6 +460,12 @@ public class Se {
 			valor = "IGUAL";
 		}else if(tokens[Interpretador.getCount()].equals("#DIFERENTE")){
 			valor = "DIFERENTE";
+		}else if(tokens[Interpretador.getCount()].equals("#ENQUANTO")){
+			valor = "ENQUANTO";
+		}else if(tokens[Interpretador.getCount()].equals("#ENTAO")){
+			valor = "ENTAO";
+		}else if(tokens[Interpretador.getCount()].equals("#FIMSE")){
+			valor = "FIMSE";
 		}else{
 			valor = tokens[Interpretador.getCount()];
 		}
@@ -314,6 +480,142 @@ public class Se {
 			floatCompara = valorFloat;
 		}else if(valueType == 3){
 			stringCompara = valorString;
+		}
+	}
+	
+	private void resolveExpressao(String [] tokens){
+		
+		while(tokens[Interpretador.getCount()].equals("ENTAO") == false){
+			if(tokens[Interpretador.getCount()].equals("SOMA")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}
+							
+				if(valueOther == 1){
+					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+						intCompara += Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+					}else{
+					
+						try{
+							valorInt += Integer.parseInt(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					} 
+				}else if(valueOther == 2){
+					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+						floatCompara += Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+					}else{
+						try{
+							valorFloat += Float.parseFloat(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}
+				}else if(valueOther == 3){
+					error.detectadoErro(8);
+				}
+					
+			}else if(tokens[Interpretador.getCount()].equals("SUBTRAI")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}
+							
+				if(valueOther == 1){
+					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+						intCompara -= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+					}else{
+					
+						try{
+							valorInt -= Integer.parseInt(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					} 
+				}else if(valueOther == 2){
+					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+						floatCompara -= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+					}else{
+						try{
+							valorFloat -= Float.parseFloat(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}
+				}else if(valueOther == 3){
+					error.detectadoErro(8);
+				}
+			}else if(tokens[Interpretador.getCount()].equals("MULTIPLICA")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}
+							
+				if(valueOther == 1){
+					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+						intCompara *= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+					}else{
+					
+						try{
+							valorInt *= Integer.parseInt(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					} 
+				}else if(valueOther == 2){
+					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+						floatCompara *= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+					}else{
+						try{
+							valorFloat *= Float.parseFloat(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}
+				}else if(valueOther == 3){
+					error.detectadoErro(8);
+				}
+			}else if(tokens[Interpretador.getCount()].equals("DIVIDE")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}
+							
+				if(valueOther == 1){
+					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+						intCompara /= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+					}else{
+					
+						try{
+							valorInt /= Integer.parseInt(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					} 
+				}else if(valueOther == 2){
+					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+						floatCompara /= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+					}else{
+						try{
+							valorFloat /= Float.parseFloat(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}
+				}else if(valueOther == 3){
+					error.detectadoErro(8);
+				}
+			}else{
+				error.detectadoErro(8);
+			}
+			
+			Interpretador.addCount();
 		}
 	}
 	
