@@ -1,0 +1,19 @@
+int count RECEBE 0 FIM
+int num RECEBE 3 FIM
+int x RECEBE 1 FIM
+
+ENQUANTO x MENOR num ENTAO
+	
+	SE num RESTO x IGUAL 0 ENTAO
+		count RECEBE count SOMA 1 FIM
+	FIMSE
+	
+	x RECEBE x SOMA 1 FIM
+
+FIMENQUANTO
+
+SE count IGUAL 2 ENTAO
+	MUGIR numero -- e -- primo! FIM
+SENAO
+	MUGIR numero -- nao -- e -- primo! FIM
+FIMSE 

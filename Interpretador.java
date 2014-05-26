@@ -1,6 +1,14 @@
-import java.util.HashMap;
-import java.util.Map;
+/* NOMES DOS PROGRAMADORES: 
+	- Eduardo Ogliari | Email: egliari@gmail.com
+	- Guilherme Hermes | Email: 
+	
+	Ultima data de modificação 26/05/2014 às 09:01
 
+	Descrição:
+		Interpretador da linguagem vaca
+*/
+import java.util.HashMap; 
+import java.util.Map;
 
 public class Interpretador {
 	
