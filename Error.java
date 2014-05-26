@@ -41,6 +41,8 @@ public class Error {
 			return true;
 		}else if(frase.equals("FIMSE")){
 			return true;
+		}else if(frase.equals("RESTO")){
+			return true;
 		}
 		
 		return false;

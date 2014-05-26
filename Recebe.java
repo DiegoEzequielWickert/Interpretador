@@ -111,6 +111,22 @@ public class Recebe {
 								}
 							}
 							
+						}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+							Interpretador.addCount();
+							
+							if(error.verifyWord(tokens[Interpretador.getCount()])){
+								error.detectadoErro(0);
+							}else{										
+								if(tokens[Interpretador.getCount()].contains(".")){
+									error.detectadoErro(1);
+								}else if(Interpretador.doesVariableNameAlreadyExists() == true){
+									intResultado %= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+									Interpretador.addCount();
+								}else{
+									intResultado %= Integer.parseInt(tokens[Interpretador.getCount()]);
+									Interpretador.addCount();
+								}
+							}
 						}else{
 							error.detectadoErro(8);
 						}
@@ -203,6 +219,20 @@ public class Recebe {
 								}
 							}
 							
+						}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+							Interpretador.addCount();
+							
+							if(error.verifyWord(tokens[Interpretador.getCount()])){
+								error.detectadoErro(0);
+							}else{										
+								if(Interpretador.doesVariableNameAlreadyExists() == true){
+									floatResultado %= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+									Interpretador.addCount();
+								}else{
+									floatResultado %= Float.parseFloat(tokens[Interpretador.getCount()]);
+									Interpretador.addCount();
+								}
+							}
 						}else{
 							error.detectadoErro(8);
 						}
@@ -308,6 +338,22 @@ public class Recebe {
 					}
 				}
 				
+			}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}else{										
+					if(tokens[Interpretador.getCount()].contains(".")){
+						error.detectadoErro(1);
+					}else if(Interpretador.doesVariableNameAlreadyExists() == true){
+						intResultado %= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						Interpretador.addCount();
+					}else{
+						intResultado %= Integer.parseInt(tokens[Interpretador.getCount()]);
+						Interpretador.addCount();
+					}
+				}
 			}else{
 				error.detectadoErro(8);
 			}
@@ -404,6 +450,20 @@ public class Recebe {
 					}
 				}
 				
+			}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}else{										
+					if(Interpretador.doesVariableNameAlreadyExists() == true){
+						floatResultado %= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						Interpretador.addCount();
+					}else{
+						floatResultado %= Float.parseFloat(tokens[Interpretador.getCount()]);
+						Interpretador.addCount();
+					}
+				}
 			}else{
 				error.detectadoErro(8);
 			}
@@ -480,6 +540,9 @@ public class Recebe {
 			Interpretador.addCount();
 		}else if(tokens[Interpretador.getCount()].equals("#FIMSE")){
 			valor = "FIMSE";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#RESTO")){
+			valor = "RESTO";
 			Interpretador.addCount();
 		}else if(Interpretador.doesVariableNameAlreadyExists()){
 			valor = Interpretador.getStringMap().get(tokens[Interpretador.getCount()]);

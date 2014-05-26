@@ -372,6 +372,38 @@ public class Se {
 					}else if(valueType == 3){
 						error.detectadoErro(8);
 					}
+				}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+					Interpretador.addCount();
+					
+					if(error.verifyWord(tokens[Interpretador.getCount()])){
+						error.detectadoErro(0);
+					}
+
+					if(valueType == 1){
+						if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+							intCompara %= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						}else{
+						
+							try{
+								intCompara %= Integer.parseInt(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}	 
+					}else if(valueType == 2){
+						if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+							floatCompara %= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						}else{
+							try{
+								floatCompara %= Float.parseFloat(tokens[Interpretador.getCount()]);
+							}catch(NumberFormatException g){
+								error.detectadoErro(2);
+							}
+						}
+					}else if(valueType == 3){
+						error.detectadoErro(8);
+					}
+										
 				}else{
 					error.detectadoErro(11);					
 				}
@@ -466,6 +498,9 @@ public class Se {
 			valor = "ENTAO";
 		}else if(tokens[Interpretador.getCount()].equals("#FIMSE")){
 			valor = "FIMSE";
+		}else if(tokens[Interpretador.getCount()].equals("#RESTO")){
+			valor = "RESTO";
+			Interpretador.addCount();
 		}else{
 			valor = tokens[Interpretador.getCount()];
 		}
@@ -495,7 +530,7 @@ public class Se {
 							
 				if(valueOther == 1){
 					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
-						intCompara += Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						valorInt += Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
 					}else{
 					
 						try{
@@ -506,7 +541,7 @@ public class Se {
 					} 
 				}else if(valueOther == 2){
 					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
-						floatCompara += Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						valorFloat += Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
 					}else{
 						try{
 							valorFloat += Float.parseFloat(tokens[Interpretador.getCount()]);
@@ -527,7 +562,7 @@ public class Se {
 							
 				if(valueOther == 1){
 					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
-						intCompara -= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						valorInt -= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
 					}else{
 					
 						try{
@@ -538,7 +573,7 @@ public class Se {
 					} 
 				}else if(valueOther == 2){
 					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
-						floatCompara -= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						valorFloat -= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
 					}else{
 						try{
 							valorFloat -= Float.parseFloat(tokens[Interpretador.getCount()]);
@@ -558,7 +593,7 @@ public class Se {
 							
 				if(valueOther == 1){
 					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
-						intCompara *= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						valorInt *= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
 					}else{
 					
 						try{
@@ -569,7 +604,7 @@ public class Se {
 					} 
 				}else if(valueOther == 2){
 					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
-						floatCompara *= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						valorFloat *= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
 					}else{
 						try{
 							valorFloat *= Float.parseFloat(tokens[Interpretador.getCount()]);
@@ -589,7 +624,7 @@ public class Se {
 							
 				if(valueOther == 1){
 					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
-						intCompara /= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+						valorInt /= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
 					}else{
 					
 						try{
@@ -600,7 +635,7 @@ public class Se {
 					} 
 				}else if(valueOther == 2){
 					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
-						floatCompara /= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+						valorFloat /= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
 					}else{
 						try{
 							valorFloat /= Float.parseFloat(tokens[Interpretador.getCount()]);
@@ -611,6 +646,38 @@ public class Se {
 				}else if(valueOther == 3){
 					error.detectadoErro(8);
 				}
+			}else if(tokens[Interpretador.getCount()].equals("RESTO")){
+				Interpretador.addCount();
+				
+				if(error.verifyWord(tokens[Interpretador.getCount()])){
+					error.detectadoErro(0);
+				}
+
+				if(valueOther == 1){
+					if(Interpretador.getIntegerMap().containsKey(tokens[Interpretador.getCount()])){
+						valorInt %= Interpretador.getIntegerMap().get(tokens[Interpretador.getCount()]);
+					}else{
+					
+						try{
+							valorInt %= Integer.parseInt(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}	 
+				}else if(valueOther == 2){
+					if(Interpretador.getFloatMap().containsKey(tokens[Interpretador.getCount()])){
+						valorFloat %= Interpretador.getFloatMap().get(tokens[Interpretador.getCount()]);
+					}else{
+						try{
+							valorFloat %= Float.parseFloat(tokens[Interpretador.getCount()]);
+						}catch(NumberFormatException g){
+							error.detectadoErro(2);
+						}
+					}
+				}else if(valueOther == 3){
+					error.detectadoErro(8);
+				}
+									
 			}else{
 				error.detectadoErro(8);
 			}
