@@ -501,6 +501,12 @@ public class Se {
 		}else if(tokens[Interpretador.getCount()].equals("#RESTO")){
 			valor = "RESTO";
 			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#FIMENQUANTO")){
+			valor = "FIMENQUANTO";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#SENAO")){
+			valor = "SENAO";
+			Interpretador.addCount();
 		}else{
 			valor = tokens[Interpretador.getCount()];
 		}

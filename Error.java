@@ -43,6 +43,10 @@ public class Error {
 			return true;
 		}else if(frase.equals("RESTO")){
 			return true;
+		}else if(frase.equals("FIMENQUANTO")){
+			return true;
+		}else if(frase.equals("SENAO")){
+			return true;
 		}
 		
 		return false;

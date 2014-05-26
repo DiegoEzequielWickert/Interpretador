@@ -544,6 +544,12 @@ public class Recebe {
 		}else if(tokens[Interpretador.getCount()].equals("#RESTO")){
 			valor = "RESTO";
 			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#FIMENQUANTO")){
+			valor = "FIMENQUANTO";
+			Interpretador.addCount();
+		}else if(tokens[Interpretador.getCount()].equals("#SENAO")){
+			valor = "SENAO";
+			Interpretador.addCount();
 		}else if(Interpretador.doesVariableNameAlreadyExists()){
 			valor = Interpretador.getStringMap().get(tokens[Interpretador.getCount()]);
 			Interpretador.addCount();
