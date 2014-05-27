@@ -45,78 +45,86 @@ ou
 >        [comandos]
 >    FIMSE
 
-6. Laços:
-    ENQUANTO [condição] ENTAO
-        [comandos]
-FIMENQUANTO
+**6.Laços**:
 
-7. Operadores aritiméticos e lógicos:
-
-
-Lógicos:
+>    ENQUANTO [condição] ENTAO
+>        [comandos]
+>FIMENQUANTO
 
 
-soma  SOMA
-subtração  SUBTRAI
-multiplicação  MULTIPLICA
-resto da divisão  RESTO
-divisão  DIVIDE
-Aritméticos
+**7. Operadores aritiméticos e lógicos**:
 
 
-maior (>)  MAIOR
-menor (<)  MENOR
-comparar ( = )  IGUAL
-comparar se diferentes (!=)  DIFERENTE
-menor ou igual (<=)  MENORIGUAL
-maior ou igual   MENORIGUAL
-Atribuição:
+**Lógicos**:
 
 
-atribuição RECEBE
+- soma (+)  SOMA
+- subtração (-)  SUBTRAI
+- multiplicação (*)  MULTIPLICA
+- resto da divisão (%)  RESTO
+- divisão (/)  DIVIDE
 
-8.Impressão de dados na tela:
+
+**Aritméticos**
+
+
+- maior (>)  MAIOR
+- menor (<)  MENOR
+- comparar ( = )  IGUAL
+- comparar se diferentes (!=)  DIFERENTE
+- menor ou igual (<=)  MENORIGUAL
+- maior ou igual (>=)   MENORIGUAL
+
+
+**Atribuição**:
+
+
+- atribuição (=) RECEBE
+
+
+**8.Impressão de dados na tela**:
 
 Exemplo de impressão:
 
-“ola mundo!”:
-MUGIR ola -- mundo! FIM
+“*ola mundo*!”:
+>MUGIR ola -- mundo! FIM
 
-Nova Linha:
+**Nova Linha**:
 
-MUGIR VAZIO FIM
+>MUGIR VAZIO FIM
 
-Imprimir variável:
+**Imprimir variável**:
 
-MUGIR VAR [nome da variavel] FIM
+>MUGIR VAR [nome da variavel] FIM
 
-Caso a impressão contenha palavras reservadas:
 
-MUGIR #FIM FIM
+**Caso a impressão contenha palavras reservadas**:
 
-No caso de palavras reservadas é necessário que se ponha o símbolo # antes da palavra.
+>MUGIR #FIM FIM
 
-9. Lista de palavras reservadas:
+No caso de palavras reservadas é necessário adicionar o símbolo **#** antes da palavra.
 
-FIM
-RECEBE
-SOMA
-SUBTRAI
-MULTIPLICA
-DIVIDE
-MUGIR
-int
-float
-string
-MAIOR
-MENOR
-MAIORIGUAL
-MENORIGUAL
-IGUAL
-DIFERENTE
-ENQUANTO
-FIMENQUANTO
-SE
-FIMSE
-RESTO
-SENAO
+**9. Lista de palavras reservadas**:
+
+- **FIM**
+- **RECEBE**
+- **SOMA**
+- **SUBTRAI**
+- **MULTIPLICA**
+- **DIVIDE**
+- **MUGIR**
+- **int**
+- **float**
+- **string**
+- **MAIOR**
+- **MENOR**
+- **MAIORIGUAL**
+- **MENORIGUAL**
+- **IGUAL**
+- **DIFERENTE**
+- **ENQUANTO**
+- **FIMENQUANTO**
+- **SE**
+- **FIMSE**
+- **RESTO**
+- **SENAO**
