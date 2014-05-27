@@ -1,42 +1,49 @@
-Avaca
+**Linguagem vaca**
 
 Eduardo Ogliari   egliari@gmail.com
+
 Guilherme Hermes guilherme.hermes182@gmail.com
 
-1. Expressões:
+**1. Expressões**:
+
 Para toda expressão devem ser mantidos os espaços em branco,
 Exemplo:
 
-[variável] RECEBE [número, variável ou expressão] FIM
+>[variável] RECEBE [número, variável ou expressão] FIM
 
 Todos os comandos devem ser escritos em letra maiúscula, todo comando deve ser encerrado com FIM.
 
-3.Tipos primitivos:
-int para inteiros
-float para com representação em ponto flutuante
-string para cadeias de caracteres
+**3.Tipos primitivos**:
 
-4. Declaração de variáveis:
+**int** para inteiros
+**float** para com representação em ponto flutuante
+**string** para cadeias de caracteres
 
-Sem inicialização:
-[tipo] [nome_da_variavel] FIM
+**4. Declaração de variáveis**:
 
-Com inicialização:
+**Sem inicialização**:
 
-[tipo] [nome_da_variavel] RECEBE [expressão] FIM
+>[tipo] [nome_da_variavel] FIM
 
 
-5.Controle de fluxo:
-SE [condição] ENTAO 
-        [comandos]
-SENAO
-        [comandos]
-FIMSE
+**Com inicialização**:
 
-Ou:
-    SE [condição] ENTAO
-        [comandos]
-    FIMSE
+>[tipo] [nome_da_variavel] RECEBE [expressão] FIM
+
+
+**5.Controle de fluxo**:
+
+>SE [condição] ENTAO 
+>        [comandos]
+>SENAO
+>        [comandos]
+>FIMSE
+
+ou
+
+>    SE [condição] ENTAO
+>        [comandos]
+>    FIMSE
 
 6. Laços:
     ENQUANTO [condição] ENTAO
