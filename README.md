@@ -1,55 +1,56 @@
 **Linguagem vaca**
 
-Eduardo Ogliari   egliari@gmail.com
-
-Guilherme Hermes guilherme.hermes182@gmail.com
+- Eduardo Ogliari   egliari@gmail.com
+- Guilherme Hermes guilherme.hermes182@gmail.com
 
 **1. Expressões**:
 
 Para toda expressão devem ser mantidos os espaços em branco,
 Exemplo:
 
->[variável] RECEBE [número, variável ou expressão] FIM
+    [variável] RECEBE [número, variável ou expressão] FIM
 
-Todos os comandos devem ser escritos em letra maiúscula, todo comando deve ser encerrado com FIM.
+Todos os comandos devem ser escritos em letra maiúscula, todo comando deve ser encerrado com **FIM**.
 
 **3.Tipos primitivos**:
 
-**int** para inteiros
-**float** para com representação em ponto flutuante
-**string** para cadeias de caracteres
+- **int** para inteiros
+- **float** para com representação em ponto flutuante (*Devem ser escritos com ponto decimal*)
+- **string** para cadeias de caracteres
+
 
 **4. Declaração de variáveis**:
 
 **Sem inicialização**:
 
->[tipo] [nome_da_variavel] FIM
+    [tipo] [nome_da_variavel] FIM
 
 
 **Com inicialização**:
 
->[tipo] [nome_da_variavel] RECEBE [expressão] FIM
+    [tipo] [nome_da_variavel] RECEBE [expressão] FIM
 
 
 **5.Controle de fluxo**:
 
->SE [condição] ENTAO 
->        [comandos]
->SENAO
->        [comandos]
->FIMSE
+    SE [condição] ENTAO 
+       [comandos]
+    SENAO
+       [comandos]
+    FIMSE
 
 ou
 
->    SE [condição] ENTAO
->        [comandos]
->    FIMSE
+    SE [condição] ENTAO
+       [comandos]
+    FIMSE
+
 
 **6.Laços**:
 
->    ENQUANTO [condição] ENTAO
->        [comandos]
->FIMENQUANTO
+    ENQUANTO [condição] ENTAO
+        [comandos]
+    FIMENQUANTO
 
 
 **7. Operadores aritiméticos e lógicos**:
@@ -84,25 +85,38 @@ ou
 
 **8.Impressão de dados na tela**:
 
-Exemplo de impressão:
 
-“*ola mundo*!”:
+Para imprimir algo na tela é utilizado o comando **MUGIR**:
+
+
+“*ola mundo*!”
 >MUGIR ola -- mundo! FIM
+
+Aonde dois hífens indicam espaço em branco --
 
 **Nova Linha**:
 
 >MUGIR VAZIO FIM
 
+VAZIO seria o equivalente a "\n" em C
+
 **Imprimir variável**:
+
 
 >MUGIR VAR [nome da variavel] FIM
 
+O nome da variável a ser impressa deve sempre aparecer após a palavra **VAR**
 
 **Caso a impressão contenha palavras reservadas**:
 
->MUGIR #FIM FIM
+    MUGIR #FIM FIM
 
 No caso de palavras reservadas é necessário adicionar o símbolo **#** antes da palavra.
+
+É possível mugir através do comando:
+
+>MUGIR FIM
+
 
 **9. Lista de palavras reservadas**:
 
