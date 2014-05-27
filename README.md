@@ -64,7 +64,7 @@ ou
 **7. Operadores aritiméticos e lógicos**:
 
 
-**Lógicos**:
+**Aritméticos**:
 
 **Operador**  | **Comando**
 ----------|----------
@@ -75,7 +75,7 @@ ou
  Divisão (/)|  DIVIDE
 
 
-**Aritméticos**
+**Lógicos**
 
 **Operador** | **Comando**
 -------------|-----------------
