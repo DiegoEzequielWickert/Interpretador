@@ -13,12 +13,12 @@ A classe **Read** possui o método main. Portanto, é necessário executar o seg
 
 **1. Expressões**:
 
-Para toda expressão devem ser mantidos os espaços em branco,
+Para toda expressão **devem ser mantidos os espaços em branco**,
 Exemplo:
 
     [variável] RECEBE [número, variável ou expressão] FIM
 
-Todos os comandos devem ser escritos em letra maiúscula, todo comando deve ser encerrado com **FIM**.
+Todos os comandos **devem ser escritos em letra maiúscula**, todo comando deve ser encerrado com **FIM**.
 
 **3.Tipos primitivos**:
 
@@ -100,7 +100,7 @@ Para imprimir algo na tela é utilizado o comando **MUGIR**:
 “*ola mundo*!”
 >MUGIR ola -- mundo! FIM
 
-Aonde dois hífens indicam espaço em branco --
+Aonde **dois hífens** indicam **espaço em branco** --
 
 **Nova Linha**:
 
