@@ -1,7 +1,15 @@
-**Linguagem vaca**
+ **Linguagem vaca**
+- 
 
 - Eduardo Ogliari   egliari@gmail.com
 - Guilherme Hermes guilherme.hermes182@gmail.com
+
+
+A classe **Read** possui o método main. Portanto, é necessário executar o seguinte comando para iniciar a interpretação:
+
+        java Read [nomedoarquivo].vaca
+
+
 
 **1. Expressões**:
 
