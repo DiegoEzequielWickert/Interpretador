@@ -66,29 +66,32 @@ ou
 
 **Lógicos**:
 
-
-- soma (+)  SOMA
-- subtração (-)  SUBTRAI
-- multiplicação (*)  MULTIPLICA
-- resto da divisão (%)  RESTO
-- divisão (/)  DIVIDE
+**Operador**  | **Comando**
+----------|----------
+ Soma (+) |  SOMA
+ Subtração (-)|  SUBTRAI
+ Multiplicação (*)|  MULTIPLICA
+ Resto da divisão (%)|  RESTO
+ Divisão (/)|  DIVIDE
 
 
 **Aritméticos**
 
-
-- maior (>)  MAIOR
-- menor (<)  MENOR
-- comparar ( = )  IGUAL
-- comparar se diferentes (!=)  DIFERENTE
-- menor ou igual (<=)  MENORIGUAL
-- maior ou igual (>=)   MENORIGUAL
+**Operador** | **Comando**
+-------------|-----------------
+ Maior (>)|  MAIOR
+ Menor (<)|  MENOR
+ Comparar ( = )|  IGUAL
+ Diferença (!=)|  DIFERENTE
+ Menor ou igual (<=)|  MENORIGUAL
+ Maior ou igual (>=)|   MENORIGUAL
 
 
 **Atribuição**:
 
-
-- atribuição (=) RECEBE
+**Operador**| **Comando**
+------------|-------------
+ atribuição (=)|RECEBE
 
 
 **8.Impressão de dados na tela**:
